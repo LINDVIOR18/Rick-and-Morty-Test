@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Rick and Morty Personages</string>
+    <string name="particular_character_name">Particular Character Name</string>
+    <string name="rick_and_morty">Rick and Morty</string>
+    <string name="back">Back</string>
+    <string name="episode">Episode:</string>
+    <string name="todo">TODO</string>
+    <string name="last_known_location">Last known location:</string>
+    <string name="status">Status:</string>
+</resources>
