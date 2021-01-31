@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.pam.rickandmortypersonajes.adapter.DetailsAdapter;
+import com.pam.rickandmortypersonajes.adapter.CharacterAdapter;
 import com.pam.rickandmortypersonajes.entity.CharacterDetails;
 import com.pam.rickandmortypersonajes.entity.ResultEpisode;
 import com.pam.rickandmortypersonajes.entity.ResultLastLocation;
@@ -31,7 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView name, status, location, episode, personagesAlsoFrom;
     private ImageView imageView;
     private boolean loading;
-    private DetailsAdapter detailsAdapter;
+    private CharacterAdapter detailsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
             startActivity(intent);
         });
         RecyclerView recyclerView = findViewById(R.id.character_by_location);
-        detailsAdapter = new DetailsAdapter(this);
+        detailsAdapter = new CharacterAdapter(this);
         recyclerView.setAdapter(detailsAdapter);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
@@ -163,7 +163,7 @@ public class DetailsActivity extends AppCompatActivity {
                         loading = true;
                         if (response.isSuccessful()) {
                             if (response.body() != null) {
-                                detailsAdapter.addCharacterResultsLocation(response.body().results);
+                                detailsAdapter.addCharacterResults(response.body().results);
                             }
                         }
                     }
