@@ -11,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.pam.rickandmortypersonajes.adapter.CharacterAdapter;
+import com.pam.rickandmortypersonajes.adapter.DetailsAdapter;
 import com.pam.rickandmortypersonajes.entity.CharacterDetails;
+import com.pam.rickandmortypersonajes.entity.ResultCharacter;
 import com.pam.rickandmortypersonajes.entity.ResultEpisode;
 import com.pam.rickandmortypersonajes.entity.ResultLastLocation;
-import com.pam.rickandmortypersonajes.entity.ResultList;
 import com.pam.rickandmortypersonajes.util.RetrofitGenerator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView name, status, location, episode, personagesAlsoFrom;
     private ImageView imageView;
     private boolean loading;
-    private CharacterAdapter detailsAdapter;
+    private DetailsAdapter detailsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
             startActivity(intent);
         });
         RecyclerView recyclerView = findViewById(R.id.character_by_location);
-        detailsAdapter = new CharacterAdapter(this);
+        detailsAdapter = new DetailsAdapter(this);
         recyclerView.setAdapter(detailsAdapter);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
@@ -133,43 +133,18 @@ public class DetailsActivity extends AppCompatActivity {
                 });
     }
 
-    //    public void personagesInfo(int id) {
-//        RetrofitGenerator.getApiService().getCharacterDetails(id)
-//                .enqueue(new Callback<CharacterDetails>() {
-//                    @Override
-//                    public void onResponse(@NonNull Call<CharacterDetails> call, @NonNull Response<CharacterDetails> response) {
-//
-//                        assert response.body() != null;
-//                        String[] values = {
-//                                response.body().name,
-//                                String.valueOf(response.body().getEpisode()),
-//                                response.body().image,
-//                                response.body().location.name
-//                        };
-//                    }
-//                    @Override
-//                    public void onFailure(@NonNull Call<CharacterDetails> call, @NonNull Throwable t) {
-//                        Log.e(TAG, t.getMessage(), t);
-//                    }
-//                });
-//    }
-//
-    //Simple return off all data...
     public void personagesInfo(int id) {
-        RetrofitGenerator.getApiService().getCharacters(id)
-                .enqueue(new Callback<ResultList>() {
+        RetrofitGenerator.getApiService().getCharacterDetailsByID(id)
+                .enqueue(new Callback<CharacterDetails>() {
                     @Override
-                    public void onResponse(@NonNull Call<ResultList> call, @NonNull Response<ResultList> response) {
+                    public void onResponse(@NonNull Call<CharacterDetails> call, @NonNull Response<CharacterDetails> response) {
                         loading = true;
-                        if (response.isSuccessful()) {
-                            if (response.body() != null) {
-                                detailsAdapter.addCharacterResults(response.body().results);
-                            }
-                        }
+                        detailsAdapter.addCharacterResultsLocation(response.body());
+
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<ResultList> call, @NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<CharacterDetails> call, @NonNull Throwable t) {
                         loading = true;
                         Log.e(TAG, t.getMessage(), t);
                     }
