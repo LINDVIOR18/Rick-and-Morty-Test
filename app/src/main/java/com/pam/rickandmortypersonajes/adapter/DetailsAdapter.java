@@ -61,7 +61,11 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Characte
             context.startActivity(intent);
         });
     }
-
+//    public void clear() {
+//        int size = characterResults.size();
+//        characterResults.clear();
+//        notifyItemRangeRemoved(0, size);
+//    }
     @Override
     public int getItemCount() {
         return characterResults.size();
