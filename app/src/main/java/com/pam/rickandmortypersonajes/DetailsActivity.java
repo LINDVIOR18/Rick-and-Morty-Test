@@ -135,16 +135,15 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void personagesInfo(int id) {
         RetrofitGenerator.getApiService().getCharacterDetailsByID(id)
-                .enqueue(new Callback<CharacterDetails>() {
+                .enqueue(new Callback<ResultCharacter>() {
                     @Override
-                    public void onResponse(@NonNull Call<CharacterDetails> call, @NonNull Response<CharacterDetails> response) {
+                    public void onResponse(@NonNull Call<ResultCharacter> call, @NonNull Response<ResultCharacter> response) {
                         loading = true;
                         detailsAdapter.addCharacterResultsLocation(response.body());
-
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<CharacterDetails> call, @NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<ResultCharacter> call, @NonNull Throwable t) {
                         loading = true;
                         Log.e(TAG, t.getMessage(), t);
                     }

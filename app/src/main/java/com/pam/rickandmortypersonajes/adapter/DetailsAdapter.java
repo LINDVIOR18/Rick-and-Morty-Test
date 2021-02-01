@@ -13,13 +13,14 @@ import com.bumptech.glide.Glide;
 import com.pam.rickandmortypersonajes.DetailsActivity;
 import com.pam.rickandmortypersonajes.R;
 import com.pam.rickandmortypersonajes.entity.CharacterDetails;
+import com.pam.rickandmortypersonajes.entity.ResultCharacter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.CharacterViewHolder> {
 
-    private List<CharacterDetails> characterResults;
+    private List<ResultCharacter> characterResults;
     private Context context;
 
     public DetailsAdapter(Context context) {
@@ -27,7 +28,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Characte
         this.context = context;
     }
 
-    public void addCharacterResultsLocation(CharacterDetails characterResults) {
+    public void addCharacterResultsLocation(ResultCharacter characterResults) {
         this.characterResults.add(characterResults);
         notifyDataSetChanged();
     }
@@ -42,9 +43,8 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Characte
 
     @Override
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
-        CharacterDetails character = characterResults.get(position);
-        String name = "";
-        holder.bind(character, name);
+        ResultCharacter character = characterResults.get(position);
+        holder.bind(character);
 
         holder.itemView.setOnClickListener(view -> {
             String url = characterResults.get(position).url;
@@ -74,7 +74,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Characte
             super(itemView);
         }
 
-        public void bind(CharacterDetails result, String name) {
+        public void bind(ResultCharacter result) {
 
             ImageView imageViewProfile = itemView.findViewById(R.id.imageProfileAdapter);
             textViewName = itemView.findViewById(R.id.name);
