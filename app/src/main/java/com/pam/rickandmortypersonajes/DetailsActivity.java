@@ -41,12 +41,15 @@ public class DetailsActivity extends AppCompatActivity {
         dataSetPersonage();
 
         Button buttonBack = findViewById(R.id.textButton);
+
         buttonBack.setOnClickListener(view -> {
             Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
         });
         RecyclerView recyclerView = findViewById(R.id.character_by_location);
+        recyclerView.removeAllViews();
         detailsAdapter = new DetailsAdapter(this);
         recyclerView.setAdapter(detailsAdapter);
         recyclerView.setHasFixedSize(true);

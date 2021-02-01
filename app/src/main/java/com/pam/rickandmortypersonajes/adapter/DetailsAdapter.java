@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.pam.rickandmortypersonajes.DetailsActivity;
 import com.pam.rickandmortypersonajes.R;
-import com.pam.rickandmortypersonajes.entity.CharacterDetails;
 import com.pam.rickandmortypersonajes.entity.ResultCharacter;
 
 import java.util.ArrayList;
@@ -29,6 +28,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Characte
     }
 
     public void addCharacterResultsLocation(ResultCharacter characterResults) {
+//        clear();
         this.characterResults.add(characterResults);
         notifyDataSetChanged();
     }
